@@ -1,5 +1,7 @@
 package gcp.mv;
 
+import io.smallrye.config.WithDefault;
+import io.smallrye.config.WithName;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -10,8 +12,8 @@ import java.net.URI;
 import java.util.List;
 
 @Path("/tabla")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+//@Produces(MediaType.APPLICATION_JSON)
+//@Consumes(MediaType.APPLICATION_JSON)
 public class TablaResource {
 
     @Inject
@@ -31,6 +33,7 @@ public class TablaResource {
 
     @POST
     @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response create(Tabla tabla) {
         tabla.persist();
         return Response.created(URI.create("/tabla/"+ tabla.getId())).build();
